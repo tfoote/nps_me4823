@@ -17,7 +17,9 @@ RUN apt-get update \
         cmake \
         lsb-release \
         gdb \
+        gedit \
         git \
+        nautilus \
         python3-dbg \
         python3-pip \
         python3-venv \

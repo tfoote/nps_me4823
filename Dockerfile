@@ -73,3 +73,14 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
  && apt clean
 
 RUN rosdep update
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends\
+    unzip \
+ && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
+ && dpkg-reconfigure --frontend noninteractive tzdata \
+ && apt clean
+
+RUN cd /tmp && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+ unzip awscliv2.zip && \
+ ./aws/install

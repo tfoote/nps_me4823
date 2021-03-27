@@ -6,7 +6,13 @@ ARG DIST=noetic
 # Set Gazebo verison
 ARG GAZ=gazebo9
 
-ENV DEBIAN_FRONTEND noninteractive
+# Non-persistent environment
+ARG DEBIAN_FRONTEND=noninteractive
+
+#Arguemnt to dockerfile
+ARG ARG_TIMEZONE=America/Los_Angeles
+#Make it persistent
+ENV TZ ${ARG_TIMEZONE}
 
 # Tools useful during development.
 RUN apt-get update \
@@ -31,14 +37,7 @@ RUN apt-get update \
         libeigen3-dev \
         pkg-config \
         protobuf-compiler \
- && apt clean
-
-RUN \
- apt-get update \
- && apt-get install -y --no-install-recommends\
-    tzdata \
- && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
+        unzip \
  && apt clean
 
 # Get ROS melodic and Gazebo 9.
@@ -72,12 +71,6 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
 
 RUN rosdep update
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends\
-    unzip \
- && ln -fs /usr/share/zoneinfo/America/Los_Angeles /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
- && apt clean
 
 RUN cd /tmp && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
  unzip awscliv2.zip && \

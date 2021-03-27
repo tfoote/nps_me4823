@@ -38,7 +38,7 @@ RUN apt-get update \
         pkg-config \
         protobuf-compiler \
         unzip \
- && apt clean
+ && apt-get clean
 
 # Get ROS melodic and Gazebo 9.
 RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
@@ -67,7 +67,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
     ros-${DIST}-xacro \
     libignition-math6 \
  && rosdep init \
- && apt clean
+ && apt-get clean
 
 RUN rosdep update
 

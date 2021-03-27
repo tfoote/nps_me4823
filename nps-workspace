@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import subprocess
+
+valid_commands = ['fetch', 'push']
+
+valid_users = [
+  'bbingham',
+  'mrmccarr',
+  'alexander.fedorovich',
+  'kbhan',
+  'samuel.royster',
+  'jun.zhang.sn'
+]
+
+parser = argparse.ArgumentParser(description='Setup NPS workspaces')
+parser.add_argument('command', type=str, choices=valid_commands)
+parser.add_argument('username', type=str, choices=valid_users)
+
+parser.add_argument(
+    '--delete',
+    action='store_true',
+    help='Use --delete option for aws s3 sync')
+
+args = parser.parse_args()
+
+delete_string = '--delete' if args.delete else ''
+user_dir = os.path.expanduser(f'~/{args.username}')
+if args.command == 'fetch':
+    cmd = f'aws s3 sync s3://nps-cloudsim/{args.username} {user_dir} {delete_string}'
+elif args.command == 'push':
+    if not os.path.exists(user_dir):
+    	parser.error(f'Directory does not exist {user_dir}')
+    cmd = f'aws s3 sync {user_dir} s3://nps-cloudsim/{args.username} {delete_string}'
+print(f'Running: {cmd}')
+subprocess.check_call(cmd.split())

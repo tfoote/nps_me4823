@@ -25,6 +25,7 @@ RUN apt-get update \
         gdb \
         gedit \
         git \
+        lximage-qt \
         nautilus \
         python3-dbg \
         python3-pip \
@@ -32,6 +33,7 @@ RUN apt-get update \
         ruby \
         software-properties-common \
         sudo \
+        tree \
         vim \
         wget \
         libeigen3-dev \
@@ -65,6 +67,8 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
     ros-${DIST}-robot-localization \
     ros-${DIST}-robot-state-publisher \
     ros-${DIST}-xacro \
+    ros-${DIST}-rosbash \
+    ros-${DIST}-ros-tutorials \
     libignition-math6 \
  && rosdep init \
  && apt-get clean

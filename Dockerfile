@@ -67,6 +67,7 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
     ros-${DIST}-robot-localization \
     ros-${DIST}-robot-state-publisher \
     ros-${DIST}-xacro \
+    ros-${DIST}-rosbash \
     ros-${DIST}-ros-tutorials \
     libignition-math6 \
  && rosdep init \

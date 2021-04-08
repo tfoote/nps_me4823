@@ -3,9 +3,6 @@ FROM gazebo
 # Set ROS distribution
 ARG DIST=noetic
 
-# Set Gazebo verison
-ARG GAZ=gazebo9
-
 # Non-persistent environment
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -43,7 +40,7 @@ RUN apt-get update \
         unzip \
  && apt-get clean
 
-# Get ROS melodic and Gazebo 9.
+# Get ROS melodic and Gazebo 11
 RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
  && apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 \
  && apt-get update \

@@ -1,4 +1,4 @@
-FROM gazebo
+FROM gazebo as prebuilder
 
 # Set ROS distribution
 ARG DIST=noetic
@@ -168,4 +168,39 @@ RUN apt-get update && apt-get install -y libc6-i386
 # while running MATLAB.
 WORKDIR /root
 
+#### Install MATLAB in a multi-build style ####
+# Without this we get a 43.9 GiB image
+FROM prebuilder as middle-stage
 
+ADD R2021a_complete /matlab-install/
+
+# Copy the file matlab-install/installer_input.txt into the same folder as the 
+# Dockerfile. The edit this file to specify what you want to install. NOTE that 
+# at a minimum you will need to have changed the following set of parameters in 
+# the file.
+#   fileInstallationKey
+#   agreeToLicense=yes
+#   Uncomment products you want to install
+ADD matlab_installer_input.txt /matlab_installer_input.txt
+
+# Now install MATLAB (make sure that the install script is executable)
+# This step takes 16 minutes!!
+RUN cd /matlab-install && \
+    chmod +x ./install && \
+    ./install -mode silent \
+        -inputFile /matlab_installer_input.txt \
+        -outputFile /tmp/mlinstall.log \
+        -destinationFolder /usr/local/MATLAB \
+    ; EXIT=$? && cat /tmp/mlinstall.log && test $EXIT -eq 0
+
+#### Build final container image ####
+FROM prebuilder
+
+COPY --from=middle-stage /usr/local/MATLAB /usr/local/MATLAB
+
+# Add a script to start MATLAB and soft link into /usr/local/bin
+ADD startmatlab.sh /opt/startscript/
+RUN chmod +x /opt/startscript/startmatlab.sh && \
+    ln -s /usr/local/MATLAB/bin/matlab /usr/local/bin/matlab
+
+# No license is enabled so we must run with "matlab -licmode online"

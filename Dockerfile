@@ -184,7 +184,7 @@ RUN apt-get update && apt-get install -y libc6-i386
 WORKDIR /root
 
 #### Install MATLAB in a multi-build style ####
-# Without this we get a 43.9 GiB image
+# Without this we get a 43.9 GiB image; with it, 29 GiB
 FROM prebuilder as middle-stage
 
 ADD R2021a_complete /matlab-install/

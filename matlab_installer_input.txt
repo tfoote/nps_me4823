@@ -185,6 +185,8 @@ outputFile=/tmp/mathworks_install.log
 ##    which you are licensed, uncomment the line for the product(s) you want
 ##    to install.
 
+product.MATLAB
+product.Simulink
 product.Aerospace_Blockset
 product.Aerospace_Toolbox
 product.Communications_Toolbox
@@ -240,7 +242,6 @@ product.System_Identification_Toolbox
 #product.IEC_Certification_Kit
 #product.LTE_Toolbox
 #product.Lidar_Toolbox
-#product.MATLAB
 #product.MATLAB_Parallel_Server
 #product.MATLAB_Production_Server
 #product.MATLAB_Web_App_Server
@@ -273,7 +274,6 @@ product.System_Identification_Toolbox
 #product.Simscape_Electrical
 #product.Simscape_Fluids
 #product.Simscape_Multibody
-#product.Simulink
 #product.Simulink_3D_Animation
 #product.Simulink_Check
 #product.Simulink_Compiler

@@ -70,11 +70,24 @@ RUN /bin/sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) 
     ros-${DIST}-rosbash \
     ros-${DIST}-ros-tutorials \
     libignition-math6 \
+    ros-${DIST}-xacro \
+    ros-${DIST}-gazebo-ros \
+    ros-${DIST}-gazebo-ros-control \
+    ros-${DIST}-gazebo-ros-pkgs \
+    ros-${DIST}-gazebo-plugins \
+    ros-${DIST}-hector-gazebo-plugins \
+    ros-${DIST}-joint-state-publisher \
+    ros-${DIST}-joint-state-controller \
+    ros-${DIST}-position-controllers  \
+    ros-${DIST}-rviz \
+    ros-${DIST}-geographic-msgs \
+    ros-${DIST}-velodyne-simulator \
  && rosdep init \
- && apt-get clean
+ && apt-get clean \
+ && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN rosdep update
-
 
 RUN cd /tmp && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
  unzip awscliv2.zip && \

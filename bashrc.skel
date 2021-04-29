@@ -117,5 +117,9 @@ if ! shopt -oq posix; then
   fi  
 fi
 
-# 
+# alias to simplify default matlab command
 alias matlab='matlab -licmode online -r "pyenv('Version','/usr/bin/python2');"'
+
+# source ros install
+source /opt/ros/noetic/setup.bash
+

@@ -94,3 +94,4 @@ RUN cd /tmp && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -
  ./aws/install
 
 COPY nps-workspace /usr/local/bin
+COPY bashrc.skel /etc/skel/.bashrc

@@ -231,7 +231,8 @@ FROM prebuilder
 
 COPY --from=middle-stage /usr/local/MATLAB /usr/local/MATLAB
 
-ADD 00-aliases.sh /etc/profile.d/
+
+RUN echo "alias matlab='matlab -licmode online -r \"pyenv('Version','/usr/bin/python2');\"'" >> /etc/skel/.bashrc
 # Add a script to start MATLAB and soft link into /usr/local/bin
 ADD startmatlab.sh /opt/startscript/
 RUN chmod +x /opt/startscript/startmatlab.sh && \

@@ -114,8 +114,8 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-  fi  
+  fi
 fi
 
-# source ros install
 source /opt/ros/noetic/setup.bash
+alias matlab='matlab -licmode online -r "pyenv('Version','/usr/bin/python2');"'

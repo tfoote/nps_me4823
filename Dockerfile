@@ -232,6 +232,7 @@ FROM prebuilder
 
 COPY --from=middle-stage /usr/local/MATLAB /usr/local/MATLAB
 
+ADD 00-aliases.sh /etc/profile.d/
 # Add a script to start MATLAB and soft link into /usr/local/bin
 ADD startmatlab.sh /opt/startscript/
 RUN chmod +x /opt/startscript/startmatlab.sh && \

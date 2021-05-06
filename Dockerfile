@@ -31,6 +31,7 @@ RUN apt-get update \
         python3-pip \
         python3-venv \
         ruby \
+        s3fs \
         software-properties-common \
         sudo \
         tree \

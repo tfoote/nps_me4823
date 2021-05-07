@@ -2,9 +2,10 @@
 
 import argparse
 import os
+import pathlib
 import subprocess
 
-valid_commands = ['fetch', 'push']
+valid_commands = ['fetch', 'push', 'sync']
 
 valid_users = [
   'bbingham',
@@ -34,5 +35,8 @@ elif args.command == 'push':
     if not os.path.exists(user_dir):
     	parser.error(f'Directory does not exist {user_dir}')
     cmd = f'aws s3 sync {user_dir} s3://nps-cloudsim/{args.username} {delete_string}'
+elif args.command == 'sync':
+    pathlib.Path(user_dir).mkdir(parents=True, exist_ok=True)
+    cmd = f's3fs nps-cloudsim:/{args.username} {user_dir}'
 print(f'Running: {cmd}')
 subprocess.check_call(cmd.split())

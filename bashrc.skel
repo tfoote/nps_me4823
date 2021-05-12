@@ -114,7 +114,11 @@ if ! shopt -oq posix; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
+<<<<<<< HEAD
   fi
+=======
+  fi  
+>>>>>>> a61387af4cfc7a59c3d4e46c1598d87287bd81c5
 fi
 
 # alias to simplify default matlab command

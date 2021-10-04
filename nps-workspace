@@ -8,12 +8,19 @@ import subprocess
 valid_commands = ['fetch', 'push', 'sync']
 
 valid_users = [
-  'bbingham',
-  'mrmccarr',
-  'alexander.fedorovich',
-  'kbhan',
-  'samuel.royster',
-  'jun.zhang.sn'
+    'bbingham',
+    'mrmccarr',
+    'alexander.fedorovich',
+    'kbhan',
+    'samuel.royster',
+    'jun.zhang.sn',
+    'keegan.delanoy',
+    'matthew.heubach',
+    'timothy.howarth',
+    'kiamin.phua.sn',
+    'spkragel',
+    'jessica.herman',
+    'kaminer'
 ]
 
 parser = argparse.ArgumentParser(description='Setup NPS workspaces')
